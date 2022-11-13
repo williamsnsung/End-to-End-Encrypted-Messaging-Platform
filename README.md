@@ -10,3 +10,5 @@ Run the flask application:
    	flask --app flaskr --debug run	
 Initialise the database:
 	flask --app flaskr init-db
+Server runs on:
+    http://127.0.0.1:5000/

@@ -4,13 +4,12 @@ from flask import current_app, g
 
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
-
-from pathlib import Path
-
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography import x509
 from cryptography.x509.oid import NameOID
-from cryptography.hazmat.primitives import hashes
 
+from pathlib import Path
 import datetime
 
 keyFile = "./key.pem"
@@ -65,42 +64,111 @@ def generateRSAKey():
             encryption_algorithm=serialization.BestAvailableEncryption(b"passphrase"),
         ))
 
-def getRSAKey():
+def generateSelfSignedCert(key):
+    if not Path(certFile).is_file():
+        subject = issuer = x509.Name([
+            x509.NameAttribute(NameOID.COUNTRY_NAME, u"UK"),
+            x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, u"Scotland"),
+            x509.NameAttribute(NameOID.LOCALITY_NAME, u"St Andrews"),
+            x509.NameAttribute(NameOID.ORGANIZATION_NAME, u"University of St Andrews"),
+            x509.NameAttribute(NameOID.COMMON_NAME, u"127.0.0.1"),
+        ])
+
+        cert = x509.CertificateBuilder().subject_name(
+            subject
+        ).issuer_name(
+            issuer
+        ).public_key(
+            key.public_key()
+        ).serial_number(
+            x509.random_serial_number()
+        ).not_valid_before(
+            datetime.datetime.utcnow()
+        ).not_valid_after(
+            # Our certificate will be valid for 10 days
+            datetime.datetime.utcnow() + datetime.timedelta(days=10)
+        ).add_extension(
+            x509.SubjectAlternativeName([x509.DNSName(u"localhost")]),
+            critical=False,
+        # Sign our certificate with our private key
+        ).sign(key, hashes.SHA256())
+        # Write our certificate out to disk.
+        with open(certFile, "wb") as f:
+            f.write(cert.public_bytes(serialization.Encoding.PEM))
+
+def getRSAPrivateKey():
     if not Path(keyFile).is_file():
         generateRSAKey()
     privateKeyFile = open(keyFile, "rb")
     data = privateKeyFile.read()
     privateKeyFile.close()
-    return cryptography.hazmat.primitives.serialization.load_pem_private_key(data, None, True)
+    return serialization.load_pem_private_key(data, None, True)
 
-def generate_certificate(user):
-    key = getRSAKey()
+def getRSAPublicKey():
+    if not Path(keyFile).is_file():
+        generateRSAKey()
+    privateKeyFile = open(keyFile, "rb")
+    data = privateKeyFile.read()
+    privateKeyFile.close()
+    return serialization.load_pem_public_key(data, None, True)
 
-    subject = issuer = x509.Name([
-        x509.NameAttribute(NameOID.COUNTRY_NAME, u"UK"),
-        x509.NameAttribute(NameOID.LOCALITY_NAME, u"St Andrews"),
-        x509.NameAttribute(NameOID.ORGANIZATION_NAME, u"University of St Andrews"),
-        x509.NameAttribute(NameOID.USER_ID, user)
-    ])
-    cert = x509.CertificateBuilder().subject_name(
-        subject
-    ).issuer_name(
-        issuer
-    ).public_key(
-        key.public_key()
-    ).serial_number(
-        x509.random_serial_number()
-    ).not_valid_before(
-        datetime.datetime.utcnow()
-    ).not_valid_after(
-        datetime.datetime.utcnow() + datetime.timedelta(days=365)
-    ).add_extension(
-        x509.SubjectAlternativeName([x509.DNSName(u"localhost")]),
-        critical=False,
-    ).sign(key, hashes.SHA256())
-    
-    return cert
+def getSignature(messageBinary):
+    privateKey = getRSAPrivateKey()
+    signature = privateKey.sign(
+        messageBinary,
+            padding.PSS(
+            mgf=padding.MGF1(hashes.SHA256()),
+            salt_length=padding.PSS.MAX_LENGTH
+        ),
+        hashes.SHA256()
+    )
+    return signature
 
-def verify_certificate(toVerify):
-    pass
 
+def verifyMessage(message, signature, username):
+    db = get_db()
+    error = None
+    # Get public key binary from db
+    user = db.execute(
+        'SELECT public_key FROM user WHERE username = ?', (username,)
+    ).fetchone()
+
+    if user is None:
+        error = 'Incorrect username.'
+    # read the binary into a usable format
+    publicKey = serialization.load_pem_public_key(
+        bytes(user['public_key'])
+    )
+
+    publicKey.verify(
+        signature,
+        message,
+        padding.PSS(
+            mgf=padding.MGF1(hashes.SHA256()),
+            salt_length=padding.PSS.MAX_LENGTH
+        ),
+        hashes.SHA256()
+    )
+
+def decrypt(cipherText):
+    privateKey = getRSAPrivateKey()
+    plainText = privateKey.decrypt(
+        cipherText,
+        padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None
+        )
+    )
+    return plainText
+
+def encrypt(messageBinary, publicKey):
+    cipherText = publicKey.encrypt(
+        messageBinary,
+        padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None
+        )
+    )
+    return cipherText
