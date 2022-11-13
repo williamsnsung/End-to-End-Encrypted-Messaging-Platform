@@ -80,7 +80,7 @@ def generate_certificate(user):
         x509.NameAttribute(NameOID.COUNTRY_NAME, u"UK"),
         x509.NameAttribute(NameOID.LOCALITY_NAME, u"St Andrews"),
         x509.NameAttribute(NameOID.ORGANIZATION_NAME, u"University of St Andrews"),
-        x509.NameAttribute(NameOID.USER_ID, u"University of St Andrews")
+        x509.NameAttribute(NameOID.USER_ID, user)
     ])
     cert = x509.CertificateBuilder().subject_name(
         subject
