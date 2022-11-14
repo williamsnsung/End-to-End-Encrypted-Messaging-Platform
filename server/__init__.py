@@ -2,9 +2,13 @@ import os
 from flask import Flask
 import db
 import auth
+import logging
 
 # create and configure the app
 app = Flask(__name__, instance_relative_config=True)
+# https://www.askpython.com/python-modules/flask/flask-logging
+logging.basicConfig(filename='record.log', level=logging.DEBUG, format=f'%(asctime)s %(levelname)s %(filename)s %(funcName)s : %(message)s')
+logging.info("========== STARTING SERVER ==========")
 app.config.from_mapping(
     SECRET_KEY='dev',
     DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
@@ -22,12 +26,6 @@ def hello():
 
 db.init_app(app)
 db.generateSelfSignedCert(db.getRSAPrivateKey())
-# message = b"message!"
-# print(message)
-# message = db.encrypt(message, db.getRSAPublicKey())
-# print(message)
-# message = db.decrypt(message)
-# print(message)
 
 app.register_blueprint(auth.bp)
 

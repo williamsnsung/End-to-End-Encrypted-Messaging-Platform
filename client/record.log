@@ -1,0 +1,66 @@
+2022-11-14 18:24:59,269 INFO client.py startup : ========== STARTING CLIENT ==========
+2022-11-14 18:25:00,598 INFO client.py startup : Starting log in sequence
+2022-11-14 18:25:03,088 INFO client.py startup : Username: test
+2022-11-14 18:25:03,090 INFO client.py startup : Hashed Password: hØÿLP,\ÿªþ,ÅØ`yùÞ0L&°ËÎÆ
+2022-11-14 18:25:03,090 INFO client.py startup : Requesting log in of test
+2022-11-14 18:25:03,101 DEBUG connectionpool.py _new_conn : Starting new HTTPS connection (1): 127.0.0.1:5000
+2022-11-14 18:25:03,168 DEBUG connectionpool.py _make_request : https://127.0.0.1:5000 "POST //auth/login HTTP/1.1" 403 51
+2022-11-14 18:25:38,770 INFO client.py startup : ========== STARTING CLIENT ==========
+2022-11-14 18:25:40,227 INFO client.py startup : Starting log in sequence
+2022-11-14 18:25:41,788 INFO client.py startup : Username: test
+2022-11-14 18:25:41,790 INFO client.py startup : Hashed Password: ÄîÏDoòs¯À>:	©Ð·±¯XËEÄ9
+2022-11-14 18:25:41,790 INFO client.py startup : Requesting log in of test
+2022-11-14 18:25:41,797 DEBUG connectionpool.py _new_conn : Starting new HTTPS connection (1): 127.0.0.1:5000
+2022-11-14 18:25:41,886 DEBUG connectionpool.py _make_request : https://127.0.0.1:5000 "POST //auth/login HTTP/1.1" 403 51
+2022-11-14 18:25:45,038 INFO client.py startup : {
+  "message": "Incorrect username or password."
+}
+
+2022-11-14 18:32:39,924 INFO client.py startup : ========== STARTING CLIENT ==========
+2022-11-14 18:32:41,552 INFO client.py startup : Starting log in sequence
+2022-11-14 18:32:43,128 INFO client.py startup : Username: test
+2022-11-14 18:32:43,129 INFO client.py startup : Hashed Password: ÄîÏDoòs¯À>:	©Ð·±¯XËEÄ9
+2022-11-14 18:32:43,129 INFO client.py startup : Requesting log in of test
+2022-11-14 18:32:43,137 DEBUG connectionpool.py _new_conn : Starting new HTTPS connection (1): 127.0.0.1:5000
+2022-11-14 18:32:43,212 DEBUG connectionpool.py _make_request : https://127.0.0.1:5000 "POST //auth/login HTTP/1.1" 403 51
+2022-11-14 18:32:43,212 INFO client.py startup : Status code: 403 Message: Incorrect username or password.
+2022-11-14 18:32:57,457 INFO client.py startup : Beginning registration sequence
+2022-11-14 18:34:26,084 INFO client.py startup : ========== STARTING CLIENT ==========
+2022-11-14 18:34:28,471 INFO client.py startup : Starting log in sequence
+2022-11-14 18:34:29,511 INFO client.py startup : Username: test
+2022-11-14 18:34:29,513 INFO client.py startup : Hashed Password: ÄîÏDoòs¯À>:	©Ð·±¯XËEÄ9
+2022-11-14 18:34:29,513 INFO client.py startup : Requesting log in of test
+2022-11-14 18:34:29,524 DEBUG connectionpool.py _new_conn : Starting new HTTPS connection (1): 127.0.0.1:5000
+2022-11-14 18:34:29,590 DEBUG connectionpool.py _make_request : https://127.0.0.1:5000 "POST //auth/login HTTP/1.1" 403 51
+2022-11-14 18:34:29,590 INFO client.py startup : Status code: 403 Message: Incorrect username or password.
+2022-11-14 18:35:07,237 INFO client.py startup : ========== STARTING CLIENT ==========
+2022-11-14 18:35:09,258 INFO client.py startup : Starting log in sequence
+2022-11-14 18:35:11,114 INFO client.py startup : Username: test
+2022-11-14 18:35:11,115 INFO client.py startup : Hashed Password: ÄîÏDoòs¯À>:	©Ð·±¯XËEÄ9
+2022-11-14 18:35:11,116 INFO client.py startup : Requesting log in of test
+2022-11-14 18:35:11,123 DEBUG connectionpool.py _new_conn : Starting new HTTPS connection (1): 127.0.0.1:5000
+2022-11-14 18:35:11,191 DEBUG connectionpool.py _make_request : https://127.0.0.1:5000 "POST //auth/login HTTP/1.1" 403 51
+2022-11-14 18:35:11,192 INFO client.py startup : Status code: 403 Message: Incorrect username or password.
+2022-11-14 18:35:16,330 INFO client.py startup : Starting log in sequence
+2022-11-14 18:35:21,045 INFO client.py startup : Username: test
+2022-11-14 18:35:21,046 INFO client.py startup : Hashed Password: ÐL}e/ê ÅZÐ£¿O+,Ñ]l°ð
+
+2022-11-14 18:35:21,092 INFO client.py startup : Requesting log in of test
+2022-11-14 18:35:21,094 DEBUG connectionpool.py _new_conn : Starting new HTTPS connection (1): 127.0.0.1:5000
+2022-11-14 18:35:21,145 DEBUG connectionpool.py _make_request : https://127.0.0.1:5000 "POST //auth/login HTTP/1.1" 200 0
+2022-11-14 18:35:23,214 INFO client.py startup : ========== STARTING CLIENT ==========
+2022-11-14 18:35:24,514 INFO client.py startup : Starting log in sequence
+2022-11-14 18:35:28,465 INFO client.py startup : Username: test
+2022-11-14 18:35:28,466 INFO client.py startup : Hashed Password: ÄîÏDoòs¯À>:	©Ð·±¯XËEÄ9
+2022-11-14 18:35:28,466 INFO client.py startup : Requesting log in of test
+2022-11-14 18:35:28,474 DEBUG connectionpool.py _new_conn : Starting new HTTPS connection (1): 127.0.0.1:5000
+2022-11-14 18:35:28,546 DEBUG connectionpool.py _make_request : https://127.0.0.1:5000 "POST //auth/login HTTP/1.1" 403 51
+2022-11-14 18:35:28,547 INFO client.py startup : Status code: 403 Message: Incorrect username or password.
+2022-11-14 18:35:29,934 INFO client.py startup : Beginning registration sequence
+2022-11-14 18:35:31,838 INFO client.py startup : Username: test
+2022-11-14 18:35:31,838 INFO client.py startup : Hashed Password: ÐL}e/ê ÅZÐ£¿O+,Ñ]l°ð
+
+2022-11-14 18:35:31,838 INFO client.py startup : Requesting registration of test
+2022-11-14 18:35:31,842 DEBUG connectionpool.py _new_conn : Starting new HTTPS connection (1): 127.0.0.1:5000
+2022-11-14 18:35:31,912 DEBUG connectionpool.py _make_request : https://127.0.0.1:5000 "POST //auth/register HTTP/1.1" 403 52
+2022-11-14 18:35:31,913 INFO client.py startup : Status code: 403 Message: User test is already registered.

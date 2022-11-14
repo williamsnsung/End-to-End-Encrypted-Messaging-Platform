@@ -1,5 +1,6 @@
 import sqlite3
 import click
+import os
 from flask import current_app, g, flash
 
 from cryptography.hazmat.primitives import serialization
@@ -8,6 +9,8 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography import x509
 from cryptography.x509.oid import NameOID
+from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
+from cryptography.exceptions import InvalidKey
 
 from pathlib import Path
 import datetime
@@ -182,3 +185,31 @@ def encrypt(messageBinary, publicKey):
         )
     )
     return cipherText
+
+def getStorablePassword(passwordBytes):
+    salt = os.urandom(16)
+    # derive
+    kdf = Scrypt(
+        salt=salt,
+        length=32,
+        n=2**14,
+        r=8,
+        p=1,
+    )
+    salt = salt.decode('latin1')
+    password = kdf.derive(passwordBytes).decode('latin1')
+    return password, salt
+
+def verifyPassword(passwordBytes, saltBytes, derivedPasswordBytes):
+    kdf = Scrypt(
+        salt=saltBytes,
+        length=32,
+        n=2**14,
+        r=8,
+        p=1,
+    )
+    try:
+        kdf.verify(passwordBytes, derivedPasswordBytes)
+    except InvalidKey:
+        return False
+    return True
