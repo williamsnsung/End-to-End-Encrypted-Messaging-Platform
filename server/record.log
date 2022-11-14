@@ -1,54 +1,214 @@
-2022-11-14 18:25:03,121 INFO auth.py login : Login request received
-2022-11-14 18:25:03,121 INFO auth.py login : Request contents: ImmutableMultiDict([('username', 'test'), ('password', 'h\x87\x87Øÿ\x14LP,\x7f\\ÿªþ,Å\x88Ø`yùÞ\x880L&°Ë\x99Î\x91Æ'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxZSZkeqnGfS8ZbFOrmyz\nYxt+aRD/peU5cLLuCNDNCvWZikUWyNaLRSId76lJxMPjFLJq/Vj/NUB7qckoMoPj\n3t7VNjYST7ha2OiR3uBIcKmwDHMnGWKUd4+SYlIZslQRJdxFSq7DA/Gd1Z/nO8tQ\nkJV0d6QHsxYV1l44ROhPSOc+ue79JFLiHocWKbRNforE1P6sbAdWvSu5m75OUTc9\ntnLLY/cQUte1iJJ2hhbq9kCUCpuiIov3TqVGaAfcTpYoedsInJ4C9oFXEDD/cg5M\n8K/lzbPUb+imtP2KUkEq3KH3kOKcmoPtvdZTkk5/rcQQ23nL9FORc554L3aZSOGt\nRwIDAQAB\n-----END PUBLIC KEY-----\n')])
-2022-11-14 18:25:03,121 INFO auth.py verifyUser : Looking up in database user: test
-2022-11-14 18:25:03,167 ERROR auth.py login : Error: Incorrect username or password.
-2022-11-14 18:25:03,168 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 18:25:03] "[31m[1mPOST //auth/login HTTP/1.1[0m" 403 -
-2022-11-14 18:25:41,812 INFO auth.py login : Login request received
-2022-11-14 18:25:41,813 INFO auth.py login : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x8a\x86ÄîÏ\x12Doòs¯À>\x1b:\t©\x11Ð·\x98\x1d±¯XËEÄ9\x16\x12\x95'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA8MyxPCDs2RqR3kSmBZ5C\nOnQClAfSj7UrMgZUjaIw/FZ3jk1vJfXlRBfUVLzPTmmnA9Sd8WmKDYniyMfxOqM/\nT6CLTef3aXwwXI+I0YYBErVEuzlujPJuaq07Vop8jlNowCtvhkr/w731aRKpwjq1\nFCuCyV30luat87UDAANs9RqurSTq/KQmo1qLkRU2vbOHS98S355K2Z/toCHtznyj\nxk0veI81n+endd1Xmw2l4qrPssL2TXITNAsmLaVqkOvhEE8Dhv/jXqXtjXWX9U7i\nWd6tGc6ax7LIyP3W4zwawZeqOMKoyaScHctednyiC8XP6UCkoZjMQBH2pv6NQTBx\nUQIDAQAB\n-----END PUBLIC KEY-----\n')])
-2022-11-14 18:25:41,813 INFO auth.py verifyUser : Looking up in database user: test
-2022-11-14 18:25:41,885 ERROR auth.py login : Error: Incorrect username or password.
-2022-11-14 18:25:41,886 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 18:25:41] "[31m[1mPOST //auth/login HTTP/1.1[0m" 403 -
-2022-11-14 18:32:43,153 INFO auth.py login : Login request received
-2022-11-14 18:32:43,153 INFO auth.py login : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x8a\x86ÄîÏ\x12Doòs¯À>\x1b:\t©\x11Ð·\x98\x1d±¯XËEÄ9\x16\x12\x95'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmRioJ+z9QEUAESZ+pSLC\n5OIX7zyZauoa60OjPvoHuKZ0TVZFGz7wmST+8iOD4m5jZ7zPH4jzPqRKC734WM5H\nBYzasmwZuQYKDoUUsKowWeE3dsMFMBp+MCEqeVTbs3av3szvXN2eF9yI/9V5Dt0U\nDHvtdS6uEFDR9Hn2SXXZlByIQTbAnsW3702LA/ygFdxInbXY7PJ/x2uZvKcUEUMy\nrxrhT6mAn32FttGEu39P2pqpyjhqR0Yfphe1NU8WUfrnGpNCR319oOQ3SANjX5Ss\nlqICgziwtTjY9gugaKzF/nYMvlP6z1vKsKAmqKA6S8jfE24AevmNtino2nQ7+QG8\n7wIDAQAB\n-----END PUBLIC KEY-----\n')])
-2022-11-14 18:32:43,154 INFO auth.py verifyUser : Looking up in database user: test
-2022-11-14 18:32:43,211 ERROR auth.py login : Error: Incorrect username or password.
-2022-11-14 18:32:43,211 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 18:32:43] "[31m[1mPOST //auth/login HTTP/1.1[0m" 403 -
-2022-11-14 18:34:29,540 INFO auth.py login : Login request received
-2022-11-14 18:34:29,540 INFO auth.py login : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x8a\x86ÄîÏ\x12Doòs¯À>\x1b:\t©\x11Ð·\x98\x1d±¯XËEÄ9\x16\x12\x95'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAz/p4b7Zn0i3Hc6tfE0zN\nx1zr6fAj7NrDiRxS7J8iI46DGAQKp4zGwOfHvmDpE3VtSWz1EOw5dQN4VWcXkLKz\nGU2veT0ZUgNmPQrHCgry17pMrVZqyS/f4CXsse7zqltLWW/8CpuP4Uc501SXFRFg\niTb12kPhvPXsG+hJ1ysWeldqcxhFsjGXdCp04llGs+sQfXGVdaLK5pKbkGU3b7fy\nmxfa8a4KNqEErjpyU+5M0yBycJZICBODNzqsELP5x8HB5RMEp0CSr8FB2e0zSGD3\nhF9BP14KC6aZ2I/A7EooX9mXlWKhIHqD9hpIV1GMef8BBVoBJlgoYQTnfazIYNxS\n+QIDAQAB\n-----END PUBLIC KEY-----\n')])
-2022-11-14 18:34:29,541 INFO auth.py verifyUser : Looking up in database user: test
-2022-11-14 18:34:29,589 ERROR auth.py login : Error: Incorrect username or password.
-2022-11-14 18:34:29,589 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 18:34:29] "[31m[1mPOST //auth/login HTTP/1.1[0m" 403 -
-2022-11-14 18:35:11,138 INFO auth.py login : Login request received
-2022-11-14 18:35:11,139 INFO auth.py login : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x8a\x86ÄîÏ\x12Doòs¯À>\x1b:\t©\x11Ð·\x98\x1d±¯XËEÄ9\x16\x12\x95'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo+Xofaez8dmDBdec8zNf\nAt7hPye0VGt1fTAJ/vxmFshPzIYe8DLuUJ3FHfWVp3S8Mux37TGfwWPVYmKpcB2b\nJgvh0HpCQ8FP7QetqwHaCRgP1YZBNz/hBU3wt1yuC2hmGDhCP+pXngvovErjRJ3Z\nKL8O4ZrHgQ6QAG9ZAr+HE47WeMPqxOXcP+0w4crrCEQuh2jpJ/j8QFHDiWiniuYP\ngy+8DBqrDuYdepXHYTud4+9XqImeYDphZkVGDGjzqKjRK2jejexNjeAXLFfq4AXt\nFK3RxV5C1YRjIKPxXa/mghXA3vmv9HxpfoAUx3udzGEOIY2f2CJ27puFTh8deE+j\nIQIDAQAB\n-----END PUBLIC KEY-----\n')])
-2022-11-14 18:35:11,139 INFO auth.py verifyUser : Looking up in database user: test
-2022-11-14 18:35:11,190 ERROR auth.py login : Error: Incorrect username or password.
-2022-11-14 18:35:11,191 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 18:35:11] "[31m[1mPOST //auth/login HTTP/1.1[0m" 403 -
-2022-11-14 18:35:21,098 INFO auth.py login : Login request received
-2022-11-14 18:35:21,098 INFO auth.py login : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x9f\x86Ð\x81\x88L}e\x9a/ê\xa0ÅZÐ\x15£¿O\x1b+\x0b\x82,Ñ]l\x15°ð\n\x08'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo+Xofaez8dmDBdec8zNf\nAt7hPye0VGt1fTAJ/vxmFshPzIYe8DLuUJ3FHfWVp3S8Mux37TGfwWPVYmKpcB2b\nJgvh0HpCQ8FP7QetqwHaCRgP1YZBNz/hBU3wt1yuC2hmGDhCP+pXngvovErjRJ3Z\nKL8O4ZrHgQ6QAG9ZAr+HE47WeMPqxOXcP+0w4crrCEQuh2jpJ/j8QFHDiWiniuYP\ngy+8DBqrDuYdepXHYTud4+9XqImeYDphZkVGDGjzqKjRK2jejexNjeAXLFfq4AXt\nFK3RxV5C1YRjIKPxXa/mghXA3vmv9HxpfoAUx3udzGEOIY2f2CJ27puFTh8deE+j\nIQIDAQAB\n-----END PUBLIC KEY-----\n')])
-2022-11-14 18:35:21,098 INFO auth.py verifyUser : Looking up in database user: test
-2022-11-14 18:35:21,142 INFO auth.py login : User test succesfully found
-2022-11-14 18:35:21,142 INFO auth.py login : Updating the public key for test
-2022-11-14 18:35:21,143 INFO auth.py login : Updated public key of test to:
+2022-11-14 19:38:15,129 INFO __init__.py <module> : 
+
+
+
+========== STARTING SERVER ==========
+2022-11-14 19:38:23,194 INFO __init__.py <module> : 
+
+
+
+========== STARTING SERVER ==========
+2022-11-14 19:38:26,360 INFO _internal.py _log : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on https://127.0.0.1:5000
+2022-11-14 19:38:26,360 INFO _internal.py _log : [33mPress CTRL+C to quit[0m
+2022-11-14 19:38:26,371 INFO _internal.py _log :  * Restarting with stat
+2022-11-14 19:38:26,511 INFO __init__.py <module> : 
+
+
+
+========== STARTING SERVER ==========
+2022-11-14 19:38:26,557 WARNING _internal.py _log :  * Debugger is active!
+2022-11-14 19:38:26,557 INFO _internal.py _log :  * Debugger PIN: 281-612-706
+2022-11-14 19:39:23,894 INFO auth.py register : Registration request received
+2022-11-14 19:39:23,895 INFO auth.py register : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x9f\x86Ð\x81\x88L}e\x9a/ê\xa0ÅZÐ\x15£¿O\x1b+\x0b\x82,Ñ]l\x15°ð\n\x08'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwgpTXMOIw+JjkyBAchZJ\na6G7zI1jgG9HOz1+QhBgRfq29cXJhsqthNDTILRsGQ5aNJFFevqy6fwJfhstl6Jm\noeb6r/hGSQss0yw2bSCOZqJu6jpzLJB4X/9IQCCrKn0FFMQnFOyqlL81/xhRFeor\nSpfAuL3sqmZnmXYIdxESC9eOtpfRLI4BwPQOKKx/QDMH92//UP6/lmjmG/dIX1hk\nlK3sQor3zskKobOfIjOyAtAL4+unAymWG9I7SOG3+L7atOAup0t/p3qoDpXZCyJq\n5iRn9Wt3uOloeXO94byUgl2W92+dZl8BTH70LBg/sk3Dy7fqIyLAHsre703qON4a\nwQIDAQAB\n-----END PUBLIC KEY-----\n')])
+2022-11-14 19:39:23,952 INFO auth.py register : Inserting into the database the following user and password
+2022-11-14 19:39:23,952 INFO auth.py register : username: test
+2022-11-14 19:39:23,952 INFO auth.py register : derived password key: ÊãLí6 #¦ï!ft¡kîù½c÷
+2022-11-14 19:39:24,003 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 19:39:24] "POST //auth/register HTTP/1.1" 200 -
+2022-11-14 19:39:24,021 INFO auth.py login : Login request received
+2022-11-14 19:39:24,021 INFO auth.py login : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x9f\x86Ð\x81\x88L}e\x9a/ê\xa0ÅZÐ\x15£¿O\x1b+\x0b\x82,Ñ]l\x15°ð\n\x08'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwgpTXMOIw+JjkyBAchZJ\na6G7zI1jgG9HOz1+QhBgRfq29cXJhsqthNDTILRsGQ5aNJFFevqy6fwJfhstl6Jm\noeb6r/hGSQss0yw2bSCOZqJu6jpzLJB4X/9IQCCrKn0FFMQnFOyqlL81/xhRFeor\nSpfAuL3sqmZnmXYIdxESC9eOtpfRLI4BwPQOKKx/QDMH92//UP6/lmjmG/dIX1hk\nlK3sQor3zskKobOfIjOyAtAL4+unAymWG9I7SOG3+L7atOAup0t/p3qoDpXZCyJq\n5iRn9Wt3uOloeXO94byUgl2W92+dZl8BTH70LBg/sk3Dy7fqIyLAHsre703qON4a\nwQIDAQAB\n-----END PUBLIC KEY-----\n')])
+2022-11-14 19:39:24,022 INFO auth.py verifyUser : Looking up in database user: test
+2022-11-14 19:39:24,091 INFO auth.py login : User test succesfully found
+2022-11-14 19:39:24,091 INFO auth.py login : Updating the public key for test
+2022-11-14 19:39:24,091 INFO auth.py login : Updated public key of test to:
  -----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo+Xofaez8dmDBdec8zNf
-At7hPye0VGt1fTAJ/vxmFshPzIYe8DLuUJ3FHfWVp3S8Mux37TGfwWPVYmKpcB2b
-Jgvh0HpCQ8FP7QetqwHaCRgP1YZBNz/hBU3wt1yuC2hmGDhCP+pXngvovErjRJ3Z
-KL8O4ZrHgQ6QAG9ZAr+HE47WeMPqxOXcP+0w4crrCEQuh2jpJ/j8QFHDiWiniuYP
-gy+8DBqrDuYdepXHYTud4+9XqImeYDphZkVGDGjzqKjRK2jejexNjeAXLFfq4AXt
-FK3RxV5C1YRjIKPxXa/mghXA3vmv9HxpfoAUx3udzGEOIY2f2CJ27puFTh8deE+j
-IQIDAQAB
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwgpTXMOIw+JjkyBAchZJ
+a6G7zI1jgG9HOz1+QhBgRfq29cXJhsqthNDTILRsGQ5aNJFFevqy6fwJfhstl6Jm
+oeb6r/hGSQss0yw2bSCOZqJu6jpzLJB4X/9IQCCrKn0FFMQnFOyqlL81/xhRFeor
+SpfAuL3sqmZnmXYIdxESC9eOtpfRLI4BwPQOKKx/QDMH92//UP6/lmjmG/dIX1hk
+lK3sQor3zskKobOfIjOyAtAL4+unAymWG9I7SOG3+L7atOAup0t/p3qoDpXZCyJq
+5iRn9Wt3uOloeXO94byUgl2W92+dZl8BTH70LBg/sk3Dy7fqIyLAHsre703qON4a
+wQIDAQAB
 -----END PUBLIC KEY-----
 
-2022-11-14 18:35:21,145 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 18:35:21] "POST //auth/login HTTP/1.1" 200 -
-2022-11-14 18:35:28,490 INFO auth.py login : Login request received
-2022-11-14 18:35:28,490 INFO auth.py login : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x8a\x86ÄîÏ\x12Doòs¯À>\x1b:\t©\x11Ð·\x98\x1d±¯XËEÄ9\x16\x12\x95'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0IgUuoKadCgIHFMAQspS\npkmq+nbx5HeFCEL6hgNG8a9GNLD80cOEaLb0jRgz5PW9jZd4vABrbISGLlYEX4sP\nejuthWxTtGZ8QXD456UlFl0SqKuhbHPxdIkE6thd2AsLNQkMUVGpHuZcEpuF/OAK\naSdS+0mTR2FHuU2vWNFlLTbGROzhMohTIel7NStRHlZLWfBYaXygTsE12H++geAK\nZSFS4znZbp8z1DKZ3bHFWtQLOlUyx7c7BRFVR7j9JGbALKfH+kN8mGWyOvb3CHuY\nDPIh6CFAivew1DiQ+wOmewWQ/S+09q84WUDC9dyiWbrD93Xf0MsAzKXQ0tnVX31N\nGQIDAQAB\n-----END PUBLIC KEY-----\n')])
-2022-11-14 18:35:28,491 INFO auth.py verifyUser : Looking up in database user: test
-2022-11-14 18:35:28,546 ERROR auth.py login : Error: Incorrect username or password.
-2022-11-14 18:35:28,546 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 18:35:28] "[31m[1mPOST //auth/login HTTP/1.1[0m" 403 -
-2022-11-14 18:35:31,853 INFO auth.py register : Registration request received
-2022-11-14 18:35:31,853 INFO auth.py register : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x9f\x86Ð\x81\x88L}e\x9a/ê\xa0ÅZÐ\x15£¿O\x1b+\x0b\x82,Ñ]l\x15°ð\n\x08'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0IgUuoKadCgIHFMAQspS\npkmq+nbx5HeFCEL6hgNG8a9GNLD80cOEaLb0jRgz5PW9jZd4vABrbISGLlYEX4sP\nejuthWxTtGZ8QXD456UlFl0SqKuhbHPxdIkE6thd2AsLNQkMUVGpHuZcEpuF/OAK\naSdS+0mTR2FHuU2vWNFlLTbGROzhMohTIel7NStRHlZLWfBYaXygTsE12H++geAK\nZSFS4znZbp8z1DKZ3bHFWtQLOlUyx7c7BRFVR7j9JGbALKfH+kN8mGWyOvb3CHuY\nDPIh6CFAivew1DiQ+wOmewWQ/S+09q84WUDC9dyiWbrD93Xf0MsAzKXQ0tnVX31N\nGQIDAQAB\n-----END PUBLIC KEY-----\n')])
-2022-11-14 18:35:31,911 INFO auth.py register : Inserting into the database the following user and password
-2022-11-14 18:35:31,911 INFO auth.py register : username: test
-2022-11-14 18:35:31,911 INFO auth.py register : derived password key: ú·"=­2:ý11¼$]'f¥ì¹ánkæÙÂÓÊ 
-2022-11-14 18:35:31,912 ERROR auth.py register : Error: User test is already registered.
-2022-11-14 18:35:31,912 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 18:35:31] "[31m[1mPOST //auth/register HTTP/1.1[0m" 403 -
+2022-11-14 19:39:24,091 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 19:39:24] "POST //auth/login HTTP/1.1" 200 -
+2022-11-14 19:40:17,167 INFO _internal.py _log :  * Detected change in '/home/mage/Documents/uni/cs4203/cs4203p2/server/auth.py', reloading
+2022-11-14 19:40:17,213 INFO _internal.py _log :  * Restarting with stat
+2022-11-14 19:40:17,354 INFO __init__.py <module> : 
+
+
+
+========== STARTING SERVER ==========
+2022-11-14 19:40:17,401 WARNING _internal.py _log :  * Debugger is active!
+2022-11-14 19:40:17,401 INFO _internal.py _log :  * Debugger PIN: 281-612-706
+2022-11-14 19:41:47,132 INFO _internal.py _log :  * Detected change in '/home/mage/Documents/uni/cs4203/cs4203p2/server/auth.py', reloading
+2022-11-14 19:41:47,183 INFO _internal.py _log :  * Restarting with stat
+2022-11-14 19:41:47,324 INFO __init__.py <module> : 
+
+
+
+========== STARTING SERVER ==========
+2022-11-14 19:41:47,371 WARNING _internal.py _log :  * Debugger is active!
+2022-11-14 19:41:47,371 INFO _internal.py _log :  * Debugger PIN: 281-612-706
+2022-11-14 19:42:03,076 INFO __init__.py <module> : 
+
+
+
+========== STARTING SERVER ==========
+2022-11-14 19:42:04,877 INFO _internal.py _log : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on https://127.0.0.1:5000
+2022-11-14 19:42:04,877 INFO _internal.py _log : [33mPress CTRL+C to quit[0m
+2022-11-14 19:42:04,880 INFO _internal.py _log :  * Restarting with stat
+2022-11-14 19:42:05,052 INFO __init__.py <module> : 
+
+
+
+========== STARTING SERVER ==========
+2022-11-14 19:42:05,097 WARNING _internal.py _log :  * Debugger is active!
+2022-11-14 19:42:05,098 INFO _internal.py _log :  * Debugger PIN: 281-612-706
+2022-11-14 19:42:14,182 INFO auth.py register : Registration request received
+2022-11-14 19:42:14,182 INFO auth.py register : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x9f\x86Ð\x81\x88L}e\x9a/ê\xa0ÅZÐ\x15£¿O\x1b+\x0b\x82,Ñ]l\x15°ð\n\x08'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlG8KPh4gzWWEXztjLLLS\nR7iaMcktceCk44a5ZzlsT7/0hJtfTqu1JSAhgtgXNdstXhYOpdlJdyp5vCdLWTVr\n9jQO8T4iRSnuJdg21MicadYadQn5iuGx3hLoaFi/lQJrWZj1AaflZ7XU9T3VJSzI\np5xCB+2GgJ27EJVUhp7hrPa1Dp1onChb7w54CACCvnupwnzsnl21xArJ0hOZmU5d\nyHjJOOxzCWc/WVytz2dVAuNvY5T6Bj+1kwHmwb/oezVn+67LT1T0d0Qg+hSJrWnU\nA9k6wupGNmTaaZSPznEdpyWv7xGD8jfWdmcJgXUDwn2WAvvpKkRmpHikxKdMIqOL\ncQIDAQAB\n-----END PUBLIC KEY-----\n')])
+2022-11-14 19:42:14,230 INFO auth.py register : Inserting into the database the following user and password
+2022-11-14 19:42:14,230 INFO auth.py register : username: test
+2022-11-14 19:42:14,231 INFO auth.py register : derived password key: ¬%ÿe)L#[¾;uiã]Q!Ð[]Õà4c®¦
+2022-11-14 19:42:14,231 ERROR auth.py register : Error: User test is already registered.
+2022-11-14 19:42:14,231 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 19:42:14] "[31m[1mPOST //auth/register HTTP/1.1[0m" 403 -
+2022-11-14 19:42:16,503 INFO auth.py login : Login request received
+2022-11-14 19:42:16,503 INFO auth.py login : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x9f\x86Ð\x81\x88L}e\x9a/ê\xa0ÅZÐ\x15£¿O\x1b+\x0b\x82,Ñ]l\x15°ð\n\x08'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlG8KPh4gzWWEXztjLLLS\nR7iaMcktceCk44a5ZzlsT7/0hJtfTqu1JSAhgtgXNdstXhYOpdlJdyp5vCdLWTVr\n9jQO8T4iRSnuJdg21MicadYadQn5iuGx3hLoaFi/lQJrWZj1AaflZ7XU9T3VJSzI\np5xCB+2GgJ27EJVUhp7hrPa1Dp1onChb7w54CACCvnupwnzsnl21xArJ0hOZmU5d\nyHjJOOxzCWc/WVytz2dVAuNvY5T6Bj+1kwHmwb/oezVn+67LT1T0d0Qg+hSJrWnU\nA9k6wupGNmTaaZSPznEdpyWv7xGD8jfWdmcJgXUDwn2WAvvpKkRmpHikxKdMIqOL\ncQIDAQAB\n-----END PUBLIC KEY-----\n')])
+2022-11-14 19:42:16,503 INFO auth.py verifyUser : Looking up in database user: test
+2022-11-14 19:42:16,575 INFO auth.py verifyUser : Correct password provided for: test
+2022-11-14 19:42:16,575 INFO auth.py login : User test succesfully found
+2022-11-14 19:42:16,575 INFO auth.py login : Updating the public key for test
+2022-11-14 19:42:16,575 INFO auth.py login : Updated public key of test to:
+ -----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlG8KPh4gzWWEXztjLLLS
+R7iaMcktceCk44a5ZzlsT7/0hJtfTqu1JSAhgtgXNdstXhYOpdlJdyp5vCdLWTVr
+9jQO8T4iRSnuJdg21MicadYadQn5iuGx3hLoaFi/lQJrWZj1AaflZ7XU9T3VJSzI
+p5xCB+2GgJ27EJVUhp7hrPa1Dp1onChb7w54CACCvnupwnzsnl21xArJ0hOZmU5d
+yHjJOOxzCWc/WVytz2dVAuNvY5T6Bj+1kwHmwb/oezVn+67LT1T0d0Qg+hSJrWnU
+A9k6wupGNmTaaZSPznEdpyWv7xGD8jfWdmcJgXUDwn2WAvvpKkRmpHikxKdMIqOL
+cQIDAQAB
+-----END PUBLIC KEY-----
+
+2022-11-14 19:42:16,575 INFO auth.py login : Successfully logged in: test
+2022-11-14 19:42:16,586 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 19:42:16] "POST //auth/login HTTP/1.1" 200 -
+2022-11-14 19:42:20,795 INFO auth.py delete : Delete request received
+2022-11-14 19:42:20,795 INFO auth.py delete : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x9f\x86Ð\x81\x88L}e\x9a/ê\xa0ÅZÐ\x15£¿O\x1b+\x0b\x82,Ñ]l\x15°ð\n\x08')])
+2022-11-14 19:42:20,795 INFO auth.py verifyUser : Looking up in database user: test
+2022-11-14 19:42:20,862 INFO auth.py verifyUser : Correct password provided for: test
+2022-11-14 19:42:20,862 INFO auth.py delete : User password verified
+2022-11-14 19:42:20,894 INFO auth.py delete : Deleting the following user from the database
+2022-11-14 19:42:20,894 INFO auth.py delete : username: test
+2022-11-14 19:42:20,943 INFO auth.py delete : Succesfully deleted: test
+2022-11-14 19:42:20,944 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 19:42:20] "POST //auth/delete HTTP/1.1" 200 -
+2022-11-14 19:46:10,296 INFO auth.py register : Registration request received
+2022-11-14 19:46:10,297 INFO auth.py register : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x9f\x86Ð\x81\x88L}e\x9a/ê\xa0ÅZÐ\x15£¿O\x1b+\x0b\x82,Ñ]l\x15°ð\n\x08'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0xSsCP0LF7tDHmY/yYy6\n4wKeYbGjdHeAgsHm3WiKfxEr4vI40OLulSGKknjo/6kZDIS+PH9byeuGqFtjPgt+\n/TCjee+8kZwZgj+/LkazPStELHXtfztmcGBGmNSahF89i/Lo1eGWOLFTbZKb4IB3\nLyGtvQXVRSLs4zEzSv1T0w7Ddu5VZg9dw/CuzWC7VksE/6zYaQeeJvzfuSSJa58V\nLoVNpMBPcJsnCHpDh54UkQJKtpNsfsvZRk6Xpeef+zwPPkW6+Ty46oDFaxdiLgyY\n67ArMsFemvJQvUy2yL4MFqnDbD/Cj/BQFQBttBzlNQHDBHyXjOIEPHEaw9SzB63O\n2QIDAQAB\n-----END PUBLIC KEY-----\n')])
+2022-11-14 19:46:10,344 INFO auth.py register : Inserting into the database the following user and password
+2022-11-14 19:46:10,345 INFO auth.py register : username: test
+2022-11-14 19:46:10,345 INFO auth.py register : derived password key: üñ.¨kóÈ_9TÉ!dqJÙÔpý*ß±üÚ&
+2022-11-14 19:46:10,356 INFO auth.py register : Succesfully registed : test
+2022-11-14 19:46:10,356 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 19:46:10] "POST //auth/register HTTP/1.1" 200 -
+2022-11-14 19:46:10,360 INFO auth.py login : Login request received
+2022-11-14 19:46:10,360 INFO auth.py login : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x9f\x86Ð\x81\x88L}e\x9a/ê\xa0ÅZÐ\x15£¿O\x1b+\x0b\x82,Ñ]l\x15°ð\n\x08'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0xSsCP0LF7tDHmY/yYy6\n4wKeYbGjdHeAgsHm3WiKfxEr4vI40OLulSGKknjo/6kZDIS+PH9byeuGqFtjPgt+\n/TCjee+8kZwZgj+/LkazPStELHXtfztmcGBGmNSahF89i/Lo1eGWOLFTbZKb4IB3\nLyGtvQXVRSLs4zEzSv1T0w7Ddu5VZg9dw/CuzWC7VksE/6zYaQeeJvzfuSSJa58V\nLoVNpMBPcJsnCHpDh54UkQJKtpNsfsvZRk6Xpeef+zwPPkW6+Ty46oDFaxdiLgyY\n67ArMsFemvJQvUy2yL4MFqnDbD/Cj/BQFQBttBzlNQHDBHyXjOIEPHEaw9SzB63O\n2QIDAQAB\n-----END PUBLIC KEY-----\n')])
+2022-11-14 19:46:10,360 INFO auth.py verifyUser : Looking up in database user: test
+2022-11-14 19:46:10,397 INFO auth.py verifyUser : Correct password provided for: test
+2022-11-14 19:46:10,397 INFO auth.py login : User test succesfully found
+2022-11-14 19:46:10,397 INFO auth.py login : Updating the public key for test
+2022-11-14 19:46:10,397 INFO auth.py login : Updated public key of test to:
+ -----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0xSsCP0LF7tDHmY/yYy6
+4wKeYbGjdHeAgsHm3WiKfxEr4vI40OLulSGKknjo/6kZDIS+PH9byeuGqFtjPgt+
+/TCjee+8kZwZgj+/LkazPStELHXtfztmcGBGmNSahF89i/Lo1eGWOLFTbZKb4IB3
+LyGtvQXVRSLs4zEzSv1T0w7Ddu5VZg9dw/CuzWC7VksE/6zYaQeeJvzfuSSJa58V
+LoVNpMBPcJsnCHpDh54UkQJKtpNsfsvZRk6Xpeef+zwPPkW6+Ty46oDFaxdiLgyY
+67ArMsFemvJQvUy2yL4MFqnDbD/Cj/BQFQBttBzlNQHDBHyXjOIEPHEaw9SzB63O
+2QIDAQAB
+-----END PUBLIC KEY-----
+
+2022-11-14 19:46:10,398 INFO auth.py login : Successfully logged in: test
+2022-11-14 19:46:10,398 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 19:46:10] "POST //auth/login HTTP/1.1" 200 -
+2022-11-14 19:46:11,877 INFO auth.py delete : Delete request received
+2022-11-14 19:46:11,877 INFO auth.py delete : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x9f\x86Ð\x81\x88L}e\x9a/ê\xa0ÅZÐ\x15£¿O\x1b+\x0b\x82,Ñ]l\x15°ð\n\x08')])
+2022-11-14 19:46:11,877 INFO auth.py verifyUser : Looking up in database user: test
+2022-11-14 19:46:11,945 INFO auth.py verifyUser : Correct password provided for: test
+2022-11-14 19:46:11,945 INFO auth.py delete : User password verified
+2022-11-14 19:46:11,978 INFO auth.py delete : Deleting the following user from the database
+2022-11-14 19:46:11,978 INFO auth.py delete : username: test
+2022-11-14 19:46:11,989 INFO auth.py delete : Succesfully deleted: test
+2022-11-14 19:46:11,989 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 19:46:11] "POST //auth/delete HTTP/1.1" 200 -
+2022-11-14 19:50:58,770 INFO auth.py login : Login request received
+2022-11-14 19:50:58,771 INFO auth.py login : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x9f\x86Ð\x81\x88L}e\x9a/ê\xa0ÅZÐ\x15£¿O\x1b+\x0b\x82,Ñ]l\x15°ð\n\x08'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAljhGLIJxALbze2w1uAfd\n45TGDfClxYoVXSh3dZN6EA6grIRjy6OT0FVpiMk6oG+xyi/zgI6+Z/wYoxpWCksv\niV5h4XrfLOSHSf0PTUCiGiyfCy8gUA37lkmYdF5IYCPbXmwlz8KnXUSGCOtbf3yt\nYZ4v+kFZubEUbNdRCll+DQjD6bBDgsGldyEl7JabFEvIGtIXcft4WNXV+q+ADK7s\nRuwCs4yFGcMxRU8X1LAYeSQFN7ni5SprsKHap5SnOxbtvgGtLZqqta13gs04YUcA\n40PW1FmlZuDFpl9cqhgmgX9CTWNIqmtAlYxjB9GnWmEgnLBKOL2KbyYBVqNXvM5s\n2QIDAQAB\n-----END PUBLIC KEY-----\n')])
+2022-11-14 19:50:58,771 INFO auth.py verifyUser : Looking up in database user: test
+2022-11-14 19:50:58,772 ERROR auth.py login : Error: Incorrect username or password.
+2022-11-14 19:50:58,773 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 19:50:58] "[31m[1mPOST //auth/login HTTP/1.1[0m" 403 -
+2022-11-14 19:51:02,424 INFO auth.py register : Registration request received
+2022-11-14 19:51:02,424 INFO auth.py register : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x9f\x86Ð\x81\x88L}e\x9a/ê\xa0ÅZÐ\x15£¿O\x1b+\x0b\x82,Ñ]l\x15°ð\n\x08'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAljhGLIJxALbze2w1uAfd\n45TGDfClxYoVXSh3dZN6EA6grIRjy6OT0FVpiMk6oG+xyi/zgI6+Z/wYoxpWCksv\niV5h4XrfLOSHSf0PTUCiGiyfCy8gUA37lkmYdF5IYCPbXmwlz8KnXUSGCOtbf3yt\nYZ4v+kFZubEUbNdRCll+DQjD6bBDgsGldyEl7JabFEvIGtIXcft4WNXV+q+ADK7s\nRuwCs4yFGcMxRU8X1LAYeSQFN7ni5SprsKHap5SnOxbtvgGtLZqqta13gs04YUcA\n40PW1FmlZuDFpl9cqhgmgX9CTWNIqmtAlYxjB9GnWmEgnLBKOL2KbyYBVqNXvM5s\n2QIDAQAB\n-----END PUBLIC KEY-----\n')])
+2022-11-14 19:51:02,481 INFO auth.py register : Inserting into the database the following user and password
+2022-11-14 19:51:02,481 INFO auth.py register : username: test
+2022-11-14 19:51:02,481 INFO auth.py register : derived password key: 0<=`ïÜÄ_iÑ~^cñÜ R4îQ2óí
+2022-11-14 19:51:02,492 INFO auth.py register : Succesfully registed : test
+2022-11-14 19:51:02,493 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 19:51:02] "POST //auth/register HTTP/1.1" 200 -
+2022-11-14 19:51:02,497 INFO auth.py login : Login request received
+2022-11-14 19:51:02,497 INFO auth.py login : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x9f\x86Ð\x81\x88L}e\x9a/ê\xa0ÅZÐ\x15£¿O\x1b+\x0b\x82,Ñ]l\x15°ð\n\x08'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAljhGLIJxALbze2w1uAfd\n45TGDfClxYoVXSh3dZN6EA6grIRjy6OT0FVpiMk6oG+xyi/zgI6+Z/wYoxpWCksv\niV5h4XrfLOSHSf0PTUCiGiyfCy8gUA37lkmYdF5IYCPbXmwlz8KnXUSGCOtbf3yt\nYZ4v+kFZubEUbNdRCll+DQjD6bBDgsGldyEl7JabFEvIGtIXcft4WNXV+q+ADK7s\nRuwCs4yFGcMxRU8X1LAYeSQFN7ni5SprsKHap5SnOxbtvgGtLZqqta13gs04YUcA\n40PW1FmlZuDFpl9cqhgmgX9CTWNIqmtAlYxjB9GnWmEgnLBKOL2KbyYBVqNXvM5s\n2QIDAQAB\n-----END PUBLIC KEY-----\n')])
+2022-11-14 19:51:02,498 INFO auth.py verifyUser : Looking up in database user: test
+2022-11-14 19:51:02,538 INFO auth.py verifyUser : Correct password provided for: test
+2022-11-14 19:51:02,538 INFO auth.py login : User test succesfully found
+2022-11-14 19:51:02,538 INFO auth.py login : Updating the public key for test
+2022-11-14 19:51:02,538 INFO auth.py login : Updated public key of test to:
+ -----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAljhGLIJxALbze2w1uAfd
+45TGDfClxYoVXSh3dZN6EA6grIRjy6OT0FVpiMk6oG+xyi/zgI6+Z/wYoxpWCksv
+iV5h4XrfLOSHSf0PTUCiGiyfCy8gUA37lkmYdF5IYCPbXmwlz8KnXUSGCOtbf3yt
+YZ4v+kFZubEUbNdRCll+DQjD6bBDgsGldyEl7JabFEvIGtIXcft4WNXV+q+ADK7s
+RuwCs4yFGcMxRU8X1LAYeSQFN7ni5SprsKHap5SnOxbtvgGtLZqqta13gs04YUcA
+40PW1FmlZuDFpl9cqhgmgX9CTWNIqmtAlYxjB9GnWmEgnLBKOL2KbyYBVqNXvM5s
+2QIDAQAB
+-----END PUBLIC KEY-----
+
+2022-11-14 19:51:02,538 INFO auth.py login : Successfully logged in: test
+2022-11-14 19:51:02,538 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 19:51:02] "POST //auth/login HTTP/1.1" 200 -
+2022-11-14 19:51:33,431 INFO auth.py register : Registration request received
+2022-11-14 19:51:33,431 INFO auth.py register : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x9f\x86Ð\x81\x88L}e\x9a/ê\xa0ÅZÐ\x15£¿O\x1b+\x0b\x82,Ñ]l\x15°ð\n\x08'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAl3kp1CiWsoA+HlaTUmEQ\nYY+OZ80e0CMPhhJt7dWHST2utnBeUqZeTno/vdHoVCIHD7TRqbstaGPXH+j4lmMO\nN+HLWzNTlVIwc7yZzlBQY44cdIF8rziWh5wFTxgdNA5LDnJk5bLzupQW35u+6TQf\nDM0Rh9vIsPZF0XL/unZQk79CJdeR0WFxVpYnT3cGjVQ7TE7ToJY2NEBHVs/8AfD5\nG787U+Wo7pAAbMn6HQS96KS8q1PrJ3aZBk3Tq8no0TbU0+nRZpJJFJI27oJyZh9i\nMCbe2AuaYDc2S+ShY95jkjXmeSb4aQlnMUBeEKSu+9v9DSfrlfDCPTMSaCF4juT8\nWQIDAQAB\n-----END PUBLIC KEY-----\n')])
+2022-11-14 19:51:33,467 INFO auth.py register : Inserting into the database the following user and password
+2022-11-14 19:51:33,467 INFO auth.py register : username: test
+2022-11-14 19:51:33,468 INFO auth.py register : derived password key: ê¡ÎqÖ[8ü16ýÒ:x?5¥ÕIå6¹<C¦l'dÑ
+2022-11-14 19:51:33,468 ERROR auth.py register : Error: User test is already registered.
+2022-11-14 19:51:33,468 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 19:51:33] "[31m[1mPOST //auth/register HTTP/1.1[0m" 403 -
+2022-11-14 19:51:45,751 INFO auth.py login : Login request received
+2022-11-14 19:51:45,751 INFO auth.py login : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x9f\x86Ð\x81\x88L}e\x9a/ê\xa0ÅZÐ\x15£¿O\x1b+\x0b\x82,Ñ]l\x15°ð\n\x08'), ('publicKey', '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtRmG5BCSqGaxoHlPs47K\nMf//kSwOrIetgE/OrOHX274sakZeIIvkfPgC4rc8FK3NcfAPw+mL5g3G2Hbmh82V\nO16rlo3XlE457yWpepyUBzE1YxoGIwJyPf8RcXijo2YtVtwl2OmDyNJdZwGZGRQh\nHx6x2iYkbzejsSROQjMbgBfTME0Nf9XWIZZk3SGqxsFiwtnYgCEo2ctLbmEGwmZ7\niyooJWmCnPZB/tHHU6AARBWSJF+ubZ/bs+uKlJjTL+ExJt7F7o5cVG8p/IxiYGGB\nU0qd3M0Z0LdW+wzS7n/QdIT56/DoLnniRb/LsCAsyxsGdQuyKX4yuque9io+wBS9\niwIDAQAB\n-----END PUBLIC KEY-----\n')])
+2022-11-14 19:51:45,752 INFO auth.py verifyUser : Looking up in database user: test
+2022-11-14 19:51:45,805 INFO auth.py verifyUser : Correct password provided for: test
+2022-11-14 19:51:45,805 INFO auth.py login : User test succesfully found
+2022-11-14 19:51:45,805 INFO auth.py login : Updating the public key for test
+2022-11-14 19:51:45,805 INFO auth.py login : Updated public key of test to:
+ -----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtRmG5BCSqGaxoHlPs47K
+Mf//kSwOrIetgE/OrOHX274sakZeIIvkfPgC4rc8FK3NcfAPw+mL5g3G2Hbmh82V
+O16rlo3XlE457yWpepyUBzE1YxoGIwJyPf8RcXijo2YtVtwl2OmDyNJdZwGZGRQh
+Hx6x2iYkbzejsSROQjMbgBfTME0Nf9XWIZZk3SGqxsFiwtnYgCEo2ctLbmEGwmZ7
+iyooJWmCnPZB/tHHU6AARBWSJF+ubZ/bs+uKlJjTL+ExJt7F7o5cVG8p/IxiYGGB
+U0qd3M0Z0LdW+wzS7n/QdIT56/DoLnniRb/LsCAsyxsGdQuyKX4yuque9io+wBS9
+iwIDAQAB
+-----END PUBLIC KEY-----
+
+2022-11-14 19:51:45,806 INFO auth.py login : Successfully logged in: test
+2022-11-14 19:51:45,817 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 19:51:45] "POST //auth/login HTTP/1.1" 200 -
+2022-11-14 19:51:48,237 INFO auth.py delete : Delete request received
+2022-11-14 19:51:48,237 INFO auth.py delete : Request contents: ImmutableMultiDict([('username', 'test'), ('password', '\x9f\x86Ð\x81\x88L}e\x9a/ê\xa0ÅZÐ\x15£¿O\x1b+\x0b\x82,Ñ]l\x15°ð\n\x08')])
+2022-11-14 19:51:48,237 INFO auth.py verifyUser : Looking up in database user: test
+2022-11-14 19:51:48,281 INFO auth.py verifyUser : Correct password provided for: test
+2022-11-14 19:51:48,281 INFO auth.py delete : User password verified
+2022-11-14 19:51:48,313 INFO auth.py delete : Deleting the following user from the database
+2022-11-14 19:51:48,313 INFO auth.py delete : username: test
+2022-11-14 19:51:48,362 INFO auth.py delete : Succesfully deleted: test
+2022-11-14 19:51:48,363 INFO _internal.py _log : 127.0.0.1 - - [14/Nov/2022 19:51:48] "POST //auth/delete HTTP/1.1" 200 -

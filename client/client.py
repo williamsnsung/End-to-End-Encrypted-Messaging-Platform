@@ -6,6 +6,7 @@ from cryptography.hazmat.primitives import serialization
 import requests
 import logging
 import sys
+import getpass
 
 logging.basicConfig(filename='record.log', level=logging.DEBUG, format=f'%(asctime)s %(levelname)s %(filename)s %(funcName)s : %(message)s')
 keyFile = "./key.pem"
@@ -65,9 +66,9 @@ class Client:
 
     def getUser(self):
         print("Username:")
-        username = input("$ ")
+        username = self.getInput()
         print("Password:")
-        password = input("$ ")
+        password = self.getInput(password=True)
         return username, password
     
     def hash(self, password):
@@ -75,8 +76,8 @@ class Client:
         digest.update(password.encode())
         return digest.finalize().decode('latin1')
 
-    def serializePublicKey(self):
-        publicKey = self.sessionKey.public_key()
+    def serializePublicKey(self, RSAKey):
+        publicKey = RSAKey.public_key()
         publicKey = publicKey.public_bytes(
             encoding=serialization.Encoding.PEM,
             format=serialization.PublicFormat.SubjectPublicKeyInfo
@@ -84,17 +85,13 @@ class Client:
         return publicKey.decode('latin1')
 
     def startup(self):
-        logging.info("========== STARTING CLIENT ==========")
+        logging.info("\n\n========== STARTING CLIENT ==========")
         loggedIn = False
         username = ""
         password = ""
-        publicKey = self.serializePublicKey()
+        publicKey = self.serializePublicKey(self.sessionKey)
         print("Welcome to C02: The Message")
-        print("Would you like to [L]ogin or [R]egister an account?")
-        uIn = input("$ ")
-        while uIn not in "lLrR":
-            print("Please enter either [L] or [l] to login or [R] or [r] to register an account")
-            uIn = input("$ ")
+        uIn = self.intro()
         while loggedIn == False:
             if uIn in "lL":
                 logging.info("Starting log in sequence")
@@ -104,14 +101,14 @@ class Client:
                 username, password = self.getUser()
 
                 print("Confirm:")
-                confirm = input("$ ")
+                confirm = self.getInput(password=True)
 
                 while password != confirm:
                     print("Passwords do not match, please re-enter your password")
                     print("Password:")
-                    password = input("$ ")
+                    password = self.getInput(password=True)
                     print("Confirm:")
-                    confirm = input("$ ")
+                    confirm = self.getInput(password=True)
 
             logging.info(f"Username: {username}")
             password = self.hash(password)
@@ -122,42 +119,105 @@ class Client:
                 print("Registering...")
                 res = self.authPost("register", {'username' : username, 'password' : password, 'publicKey' : publicKey})
             if res is None or res.ok:
+                if res is not None:
+                    logging.info(f"Successfully registered: {username}")
                 logging.info(f"Requesting log in of {username}")
                 print("Logging in...")
                 res = self.authPost("login", {'username' : username, 'password' : password, 'publicKey' : publicKey})
             if res.ok == False:
-                json = res.json()
-                print(f"Error: {json['message']}")
-                logging.info(f"Status code: {res.status_code} Message: {json['message']}")
-                while True:
-                    print("Would you like to [L]ogin or [R]egister an account?")
-                    print("\t[L]ogin")
-                    print("\t[R]egister")
-                    print("\t[E]xit")
-                    uIn = input("$ ")
-                    if uIn in "YyEeLlRr":
-                        break
-                if uIn in "Ee":
-                    sys.exit()
-                
-                
+                self.logError(res)
+                uIn = self.intro()
             else:
-                print("Success!")
+                logging.info(f"Successfully logged in: {username}")
+                self.username = username
+                print(f"Success, welcome: {self.username}!")
                 loggedIn = True
 
-    def deleteAccount(self, username):
+    def deleteAccount(self):
+        username = self.username
         logging.info(f"Beginning request to delete user: {username}")
         print("Please confirm your password")
         print("Password:")
-        password = input(f"{username}$ ")
+        password = self.getInput(username, True)
         password = self.hash(password)
         logging.info(f"Hashed Password: {password}")
         res = self.authPost("delete", {'username' : username, 'password' : password})
         logging.info(f"Authentication request result: {res}")
+        if res.ok:
+            logging.info(f"Account deleted for {username}")
+            print("Your account has been deleted")
+            self.end()
+        else:
+            self.logError(res)
+
+    def logError(self, res):
+        json = res.json()
+        print(f"Error: {json['message']}")
+        logging.info(f"Status code: {res.status_code} Message: {json['message']}")
+
+    def intro(self):
+        uIn = ""
+        while True:
+            print("Would you like to [L]ogin or [R]egister an account?")
+            print("\t[L]ogin")
+            print("\t[R]egister")
+            print("\t[E]xit")
+            uIn = self.getInput()
+            if uIn in "YyEeLlRr":
+                break
+        if uIn in "Ee":
+            self.end()
+        return uIn
+    
+    def end(self):
+        print("\nExiting C02: Goodbye!")
+        sys.exit()
+    
+    def getInput(self, preamble = "", password = False):
+        uIn = ""
+        if password:
+            uIn = getpass.getpass(f"{preamble}$ ")
+        else:
+            uIn = input(f"{preamble}$ ")
+        print()
+        return uIn
+    
+    def printFreeUsers(self):
+        pass
+
+    def sendMsg(self, partner, msg):
+        pass
 
 
 
-uIn = ""
+uIn = "start"
+user = ""
+chatting = ""
 client = Client()
 client.startup()
-# client.deleteAccount("test")
+user = client.username
+while uIn not in "eE":
+    if chatting == "":
+        print("Commands:")
+        print("\t[F]ree users")
+        print("\t[C]hat with online <USER>")
+        print("\t[D]elete account")
+        print("\t[E]xit")
+    uIn = client.getInput(user)
+    
+    if chatting == "":
+        if uIn[0] in "cC":
+            partner = uIn[2:]
+            print(f"You are now chatting with: {partner}")
+            print(f"To stop chatting, type: !exit")
+            chatting = partner
+        elif uIn in "fF":
+            client.printFreeUsers()
+        elif uIn in "dD":
+            client.deleteAccount()
+        elif uIn in "eE":
+            client.end()
+    elif uIn == "!exit":
+        chatting = ""
+    else:
+        client.sendMsg(partner, uIn)

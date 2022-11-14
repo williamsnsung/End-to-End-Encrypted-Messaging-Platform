@@ -8,7 +8,7 @@ import logging
 app = Flask(__name__, instance_relative_config=True)
 # https://www.askpython.com/python-modules/flask/flask-logging
 logging.basicConfig(filename='record.log', level=logging.DEBUG, format=f'%(asctime)s %(levelname)s %(filename)s %(funcName)s : %(message)s')
-logging.info("========== STARTING SERVER ==========")
+logging.info("\n\n\n\n========== STARTING SERVER ==========")
 app.config.from_mapping(
     SECRET_KEY='dev',
     DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),

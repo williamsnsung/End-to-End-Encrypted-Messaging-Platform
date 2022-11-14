@@ -39,6 +39,7 @@ def register():
                     (username, password, publicKey, salt),
                 )
                 db.commit()
+                logging.info(f"Succesfully registed : {username}")
             except db.IntegrityError:
                 error = f"User {username} is already registered."
         if error is not None:
@@ -76,6 +77,7 @@ def delete():
                     (username,)
                 )
                 db.commit()
+                logging.info(f"Succesfully deleted: {username}")
             except db.IntegrityError:
                 error = f"User {username} does not exist."
         if error is not None:
@@ -116,6 +118,7 @@ def login():
                     (publicKey, username),
                 )
                 logging.info(f"Updated public key of {username} to:\n {publicKey}")
+                logging.info(f"Successfully logged in: {username}")
                 db.commit()
             except db.IntegrityError:
                 error = f"Could not update the public key for {username}"
@@ -140,6 +143,8 @@ def verifyUser(username, password, db):
         )
         if res == False:
             error = 'Incorrect username or password.'
+        else:
+            logging.info(f"Correct password provided for: {username}")
     return error
 
 # @bp.before_app_request
