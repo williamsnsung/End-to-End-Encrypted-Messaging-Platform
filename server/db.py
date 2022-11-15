@@ -16,10 +16,13 @@ from pathlib import Path
 import datetime
 import ipaddress
 
+# paths to the key and certificate
 keyFile = "./key.pem"
 certFile = "./cert.pem"
+# the passphrase used on the private key for generation and loading
 password = b"passphrase"
 
+# return the current instance of the database
 def get_db():
     if 'db' not in g:
         g.db = sqlite3.connect(
@@ -30,12 +33,14 @@ def get_db():
 
     return g.db
 
+# close the current instance of the database
 def close_db(e=None):
     db = g.pop('db', None)
     
     if db is not None:
         db.close()
 
+# initialise the database
 def init_db():
     db = get_db()
     
@@ -54,8 +59,7 @@ def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
 
-# Generates a private key if one doesn't exist locally and stores it in ./key.pem
-# TODO encrypt private key
+# generates an rsa key using the password provided
 def generateRSAKey():
     key = rsa.generate_private_key(
         public_exponent=65537,
@@ -69,6 +73,7 @@ def generateRSAKey():
             encryption_algorithm=serialization.BestAvailableEncryption(password),
         ))
 
+# generates a self signed certificate
 def generateSelfSignedCert(key):
     if not Path(certFile).is_file():
         subject = issuer = x509.Name([
@@ -100,6 +105,7 @@ def generateSelfSignedCert(key):
         with open(certFile, "wb") as f:
             f.write(cert.public_bytes(serialization.Encoding.PEM))
 
+# serialises the private key and generates it if it doesn't exist
 def getRSAPrivateKey():
     if not Path(keyFile).is_file():
         generateRSAKey()
@@ -108,12 +114,14 @@ def getRSAPrivateKey():
     privateKeyFile.close()
     return serialization.load_pem_private_key(data, password, True)
 
+# gets the public key from our rsa key
 def getRSAPublicKey():
     if not Path(keyFile).is_file():
         generateRSAKey()
     privateKey = getRSAPrivateKey()
     return privateKey.public_key()
 
+# signs a message using the private key
 def getSignature(messageBinary):
     privateKey = getRSAPrivateKey()
     signature = privateKey.sign(
@@ -126,12 +134,13 @@ def getSignature(messageBinary):
     )
     return signature
 
-
+# verifies that a message is from the user by using the provided signature and the public key on the database
 def verifyMessageSignature(messageBinary, signatureBinary, username):
     db = get_db()
     error = None
     user = None
 
+    # tries to retrieve the public key on the database
     if error is None:
         try:
             user = db.execute(
@@ -144,12 +153,12 @@ def verifyMessageSignature(messageBinary, signatureBinary, username):
 
     flash(error)
 
-    # Get public key binary from db
-    # read the binary into a usable format
+    # read the public key into a usable format
     publicKey = serialization.load_pem_public_key(
         user['public_key'].encode('latin1')
     )
 
+    # verify authenticity of the provided signature
     try:
         publicKey.verify(
             signatureBinary,
@@ -164,6 +173,7 @@ def verifyMessageSignature(messageBinary, signatureBinary, username):
         return False
     return True
 
+# decrypts a message using the server private key
 def decrypt(cipherText):
     privateKey = getRSAPrivateKey()
     plainText = privateKey.decrypt(
@@ -176,6 +186,7 @@ def decrypt(cipherText):
     )
     return plainText
 
+# encrypts a message using the server private key
 def encrypt(messageBinary, publicKey):
     cipherText = publicKey.encrypt(
         messageBinary,
@@ -187,6 +198,8 @@ def encrypt(messageBinary, publicKey):
     )
     return cipherText
 
+# uses the scrypt key derivation algorithm to encode the password so that it may be stored on the database
+# returns the salt used and the resultant key
 def getStorablePassword(passwordBytes):
     salt = os.urandom(16)
     # derive
@@ -198,9 +211,10 @@ def getStorablePassword(passwordBytes):
         p=1,
     )
     salt = salt.decode('latin1')
-    password = kdf.derive(passwordBytes).decode('latin1')
-    return password, salt
+    key = kdf.derive(passwordBytes).decode('latin1')
+    return key, salt
 
+# verifies a password against the derived key stored on the database
 def verifyPassword(passwordBytes, saltBytes, derivedPasswordBytes):
     kdf = Scrypt(
         salt=saltBytes,
