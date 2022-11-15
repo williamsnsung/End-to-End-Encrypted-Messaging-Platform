@@ -10,7 +10,7 @@ from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography import x509
 from cryptography.x509.oid import NameOID
 from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
-from cryptography.exceptions import InvalidKey
+from cryptography.exceptions import InvalidKey, InvalidSignature
 
 from pathlib import Path
 import datetime
@@ -127,7 +127,7 @@ def getSignature(messageBinary):
     return signature
 
 
-def verifyMessage(message, signature, username):
+def verifyMessageSignature(messageBinary, signatureBinary, username):
     db = get_db()
     error = None
     user = None
@@ -140,28 +140,29 @@ def verifyMessage(message, signature, username):
             if user is None:
                 error = 'Incorrect username.'
         except db.IntegrityError:
-            error = f"User {username} is already registered."
+            error = f"User {username} does not exist."
 
     flash(error)
 
     # Get public key binary from db
-    
-
-   
     # read the binary into a usable format
     publicKey = serialization.load_pem_public_key(
-        bytes(user['public_key'])
+        user['public_key'].encode('latin1')
     )
 
-    publicKey.verify(
-        signature,
-        message,
-        padding.PSS(
-            mgf=padding.MGF1(hashes.SHA256()),
-            salt_length=padding.PSS.MAX_LENGTH
-        ),
-        hashes.SHA256()
-    )
+    try:
+        publicKey.verify(
+            signatureBinary,
+            messageBinary,
+            padding.PSS(
+                mgf=padding.MGF1(hashes.SHA256()),
+                salt_length=padding.PSS.MAX_LENGTH
+            ),
+            hashes.SHA256()
+        )
+    except InvalidSignature:
+        return False
+    return True
 
 def decrypt(cipherText):
     privateKey = getRSAPrivateKey()

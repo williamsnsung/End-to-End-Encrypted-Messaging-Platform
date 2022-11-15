@@ -1,10 +1,8 @@
 DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS post;
 
 CREATE TABLE user (
 	username TEXT PRIMARY KEY,
 	password TEXT NOT NULL,
-	public_key TEXT NOT NULL,
-	salt TEXT NOT NULL
+	salt TEXT NOT NULL,
+	public_key TEXT
 );
-

@@ -7,15 +7,15 @@ import requests
 import logging
 import sys
 import getpass
+import socketio
 
 logging.basicConfig(filename='record.log', level=logging.DEBUG, format=f'%(asctime)s %(levelname)s %(filename)s %(funcName)s : %(message)s')
-keyFile = "./key.pem"
 url = "https://127.0.0.1:5000/"
+
 class Client:
     def __init__ (self):
         self.username = ""
         self.sessionKey = self.generateRSAKey()
-        self.oneTimeKey = self.generateRSAKey()
 
     def generateRSAKey(self):
         key = rsa.generate_private_key(
@@ -76,8 +76,8 @@ class Client:
         digest.update(password.encode())
         return digest.finalize().decode('latin1')
 
-    def serializePublicKey(self, RSAKey):
-        publicKey = RSAKey.public_key()
+    def serializePublicKey(self):
+        publicKey = self.sessionKey.public_key()
         publicKey = publicKey.public_bytes(
             encoding=serialization.Encoding.PEM,
             format=serialization.PublicFormat.SubjectPublicKeyInfo
@@ -89,7 +89,7 @@ class Client:
         loggedIn = False
         username = ""
         password = ""
-        publicKey = self.serializePublicKey(self.sessionKey)
+        publicKey = self.serializePublicKey()
         print("Welcome to C02: The Message")
         uIn = self.intro()
         while loggedIn == False:
@@ -133,7 +133,7 @@ class Client:
                 print(f"Success, welcome: {self.username}!")
                 loggedIn = True
 
-    def deleteAccount(self):
+    def deleteAccount(self, sio):
         username = self.username
         logging.info(f"Beginning request to delete user: {username}")
         print("Please confirm your password")
@@ -146,7 +146,7 @@ class Client:
         if res.ok:
             logging.info(f"Account deleted for {username}")
             print("Your account has been deleted")
-            self.end()
+            self.end(sio)
         else:
             self.logError(res)
 
@@ -168,9 +168,11 @@ class Client:
         if uIn in "Ee":
             self.end()
         return uIn
-    
-    def end(self):
+
+    def end(self, sio = None):
         print("\nExiting C02: Goodbye!")
+        if sio is not None:
+            sio.disconnect()
         sys.exit()
     
     def getInput(self, preamble = "", password = False):
@@ -185,10 +187,44 @@ class Client:
     def printFreeUsers(self):
         pass
 
-    def sendMsg(self, partner, msg):
-        pass
+sio = socketio.Client()
+http_session = requests.Session()
+http_session.verify = '../server/cert.pem'
+sio = socketio.Client(http_session=http_session)
 
+@sio.on('target public key')
+def onTargetPublicKey(json):
+    logging.error(f"Received public key for target: {json['target']}")
+    print(f"Received public key for target: {json['target']}")
+    logging.info(f"Received public key: {json['public key']}")
+    print(f"Received public key: {json['public key']}")
 
+@sio.on('encrypted msg')
+def onEncryptedMsg(json):
+    pass
+
+@sio.on('bad key')
+def onBadKey(json):
+    logging.error(f"Error on connect, message: {json['message']}")
+    print(f"Error on connect, message: {json['message']}")
+    sio.disconnect()
+
+@sio.on('busy user')
+def onBusyUser(json):
+    logging.error(f"Error on message request, message: {json['message']}")
+    print(f"Error on message request, message: {json['message']}")
+
+@sio.event
+def connect():
+    print("I'm connected!")
+
+@sio.event
+def connect_error(data):
+    print("The connection failed!")
+
+@sio.event
+def disconnect():
+    print("I'm disconnected!")
 
 uIn = "start"
 user = ""
@@ -196,6 +232,9 @@ chatting = ""
 client = Client()
 client.startup()
 user = client.username
+
+sio.connect(url, auth={'username' : client.username, 'signature' : client.getSignature(client.username.encode('latin1')).decode('latin1')})
+print('my sid is', sio.sid)
 while uIn not in "eE":
     if chatting == "":
         print("Commands:")
@@ -211,13 +250,15 @@ while uIn not in "eE":
             print(f"You are now chatting with: {partner}")
             print(f"To stop chatting, type: !exit")
             chatting = partner
+            json = {'source': client.username, 'target' : partner, 'signature' : client.getSignature(partner.encode('latin1')).decode('latin1')}
+            sio.emit('init msg', json)
         elif uIn in "fF":
             client.printFreeUsers()
         elif uIn in "dD":
             client.deleteAccount()
         elif uIn in "eE":
-            client.end()
+            client.end(sio)
     elif uIn == "!exit":
         chatting = ""
-    else:
-        client.sendMsg(partner, uIn)
+    # else:
+        
