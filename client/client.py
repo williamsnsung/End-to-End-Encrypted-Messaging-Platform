@@ -296,7 +296,7 @@ while uIn not in "eE":
             sio.emit('init msg', json)
         elif uIn in "dD":
             # initates account deletion
-            client.deleteAccount()
+            client.deleteAccount(sio)
         elif uIn in "eE":
             # closes the connection with the server
             client.end(sio)

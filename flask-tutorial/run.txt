@@ -1,1 +1,0 @@
-flask --app flaskr --debug run

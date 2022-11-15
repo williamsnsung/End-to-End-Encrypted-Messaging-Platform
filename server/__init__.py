@@ -71,7 +71,7 @@ def disconnectClient():
         (username,),
     )
     logging.info(f"Updated public key of <{username}> to NULL")
-    logging.info(f"Disconnected session for user {username}")
+    logging.info(f"Disconnected session for user: {username}")
 
 # when a user begins a chat with another user, pass the target public key to the source user if the source user has a valid identity and they are both online
 @socketio.on('init msg')

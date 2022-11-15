@@ -4,11 +4,14 @@ Create a virtual environment:
 	python3 -m venv ./venv  
 Activate it:
 	source venv/bin/activate	
-Install Flask:
+Install the following:
 	pip install Flask
+	pip install cryptography
+	pip install eventlet
+	pip install Flask-SocketIO
+	pip install requests
+	pip install python-socketio
 Run the flask application:
-   	flask --app flaskr --debug run	
-Initialise the database:
-	flask --app flaskr init-db
-Server runs on:
-    http://127.0.0.1:5000/
+   	python3 server/__init__.py
+Run the client application:
+   	python3 client/client.py
