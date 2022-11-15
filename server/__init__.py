@@ -29,7 +29,8 @@ def hello():
     return 'Hello, World!'
 
 db.init_app(app)
-db.generateSelfSignedCert(db.getRSAPrivateKey())
+key = db.getRSAPrivateKey()
+db.generateSelfSignedCert(key)
 
 app.register_blueprint(auth.bp)
 
@@ -65,22 +66,27 @@ def disconnectClient():
 
 @socketio.on('init msg')
 def initMsg(json):
-    print(request.sid)
-    print(json)
     #{'source': client.username, 'target' : partner, 'signature' : client.getSignature(partner)}
     source = json['source']
     target = json['target']
     signature = json['signature']
+    logging.info(f"Message initiated by user <{source}> to user <{target}>")
     if source in clientToSID and target in clientToSID:
+        logging.info(f"Both users verified to be online")
         if verifyMessageSignature(target.encode('latin1'), signature.encode('latin1'), source):
+            logging.info(f"User <{source}> signature verified")
             targetData = db.get_db().execute(
                 'SELECT public_key FROM user WHERE username = ?', 
                 (target,)
             ).fetchone()
+            logging.info(f"Public key of User <{target}> fetched")
+            logging.info(f"Sending public key to user <{source}>")
             emit('target public key', {'public key': targetData['public_key'], 'target': target})
         else:
+            logging.error(f"Given signature does not match public key of user <{source}>")
             emit('bad key', {'message': 'Invalid signature.'})
     else:
+        logging.info(f"Target user <{target}> is offline")
         emit('busy user', {'message': 'Target user is unavailable.'})
     # receive source user, target user, signature
     # check both users in dictionary of logged in users
@@ -88,13 +94,29 @@ def initMsg(json):
     # return public key of target user encrypted using public key of source user signed by server
 
 @socketio.on('send message')
-def sendMsg(json):
+def sendMessage(json):
+    source = json['source']
+    target = json['target']
+    symKey = json['symKey']
+    message = json['message']
+    signature = json['signature']
+    logging.info(f"Sending message from user <{source}> to user <{target}>")
+    if source in clientToSID and target in clientToSID:
+        logging.info(f"Both users verified to be online")
+        if verifyMessageSignature(symKey.encode('latin1'), signature.encode('latin1'), source):
+            logging.info(f"User <{source}> signature verified")
+            logging.info(f"Sending message to user <{target}>")
+            emit('encrypted message', {'source': source, 'message': message, 'symKey' : symKey},to=clientToSID[target])
+        else:
+            logging.error(f"Given signature does not match public key of user <{source}>")
+            emit('bad key', {'message': 'Invalid signature.'})
+    else:
+        logging.error(f"Target user <{target}> is offline")
+        emit('busy user', {'message': 'Target user is unavailable.'})
     # receive source user, encrypted symmetric key, message encrypted by symmetric key, signature, target user
     # check both users are still online
     # verify source user signature
     # forward data to target user
-    pass
 
 if __name__ == "__main__":
-    # ssl_context=('cert.pem', 'key.pem')
     socketio.run(app, debug=True, keyfile='key.pem', certfile='cert.pem')

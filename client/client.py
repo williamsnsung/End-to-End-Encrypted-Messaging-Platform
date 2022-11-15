@@ -2,6 +2,8 @@ from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives import serialization
+from cryptography.fernet import Fernet
+from cryptography.hazmat.primitives.serialization import load_pem_public_key
 
 import requests
 import logging
@@ -39,8 +41,8 @@ class Client:
     def verifyMessage(self, message, signature):
         pass
 
-    def decrypt(self, cipherText, privateKey):
-        plainText = privateKey.decrypt(
+    def decrypt(self, cipherText):
+        plainText = self.sessionKey.decrypt(
             cipherText,
             padding.OAEP(
                 mgf=padding.MGF1(algorithm=hashes.SHA256()),
@@ -59,7 +61,7 @@ class Client:
                 label=None
             )
         )
-        return cipherText
+        return cipherText.decode('latin1')
 
     def authPost(self, path, json):
         return requests.post(url + "/auth/" + path, data=json, verify="../server/cert.pem")
@@ -191,22 +193,41 @@ sio = socketio.Client()
 http_session = requests.Session()
 http_session.verify = '../server/cert.pem'
 sio = socketio.Client(http_session=http_session)
+targetPublicKey = None
 
 @sio.on('target public key')
 def onTargetPublicKey(json):
-    logging.error(f"Received public key for target: {json['target']}")
-    print(f"Received public key for target: {json['target']}")
-    logging.info(f"Received public key: {json['public key']}")
-    print(f"Received public key: {json['public key']}")
+    logging.info(f"Received public key for target: {json['target']}")
+    logging.info(f"Public key: {json['public key']}")
+    global targetPublicKey
+    logging.info(f"Storing public key for duration of chat")
+    targetPublicKey = serialization.load_pem_public_key(json['public key'].encode('latin1'))
 
-@sio.on('encrypted msg')
+@sio.on('encrypted message')
 def onEncryptedMsg(json):
-    pass
+    source = json['source']
+    symKey = json['symKey']
+    message = json['message']
+    logging.info(f"Received encrypted message for <{client.username}>")
+    logging.info(f"source: {source}")
+    logging.info(f"symKey: {symKey}")
+    logging.info(f"message: {message}")
+    logging.info(f"Decrypting symmetric key using session key")
+    symKey = client.decrypt(symKey.encode('latin1'))
+    f = Fernet(symKey)
+    logging.info(f"Decrypting message contents using symmetric key")
+    message = f.decrypt(message.encode('latin1')).decode('latin1')
+    logging.info(f"Decrypted message contents:")
+    logging.info(f"source: {source}")
+    logging.info(f"symKey: {symKey}")
+    logging.info(f"message: {message}")
+    print(f"\n{source}> {message}\n{client.username}$ ")
 
 @sio.on('bad key')
 def onBadKey(json):
     logging.error(f"Error on connect, message: {json['message']}")
     print(f"Error on connect, message: {json['message']}")
+    logging.info(f"Disconnecting")
     sio.disconnect()
 
 @sio.on('busy user')
@@ -216,15 +237,15 @@ def onBusyUser(json):
 
 @sio.event
 def connect():
-    print("I'm connected!")
+    logging.info(f"Successfully connected to server")
 
 @sio.event
 def connect_error(data):
-    print("The connection failed!")
+    logging.info(f"Can't connect to server")
 
 @sio.event
 def disconnect():
-    print("I'm disconnected!")
+    logging.info(f"Disconnected from the server")
 
 uIn = "start"
 user = ""
@@ -234,16 +255,14 @@ client.startup()
 user = client.username
 
 sio.connect(url, auth={'username' : client.username, 'signature' : client.getSignature(client.username.encode('latin1')).decode('latin1')})
-print('my sid is', sio.sid)
 while uIn not in "eE":
     if chatting == "":
         print("Commands:")
-        print("\t[F]ree users")
         print("\t[C]hat with online <USER>")
         print("\t[D]elete account")
         print("\t[E]xit")
     uIn = client.getInput(user)
-    
+    logging.info(f"user input: {uIn}")
     if chatting == "":
         if uIn[0] in "cC":
             partner = uIn[2:]
@@ -251,14 +270,42 @@ while uIn not in "eE":
             print(f"To stop chatting, type: !exit")
             chatting = partner
             json = {'source': client.username, 'target' : partner, 'signature' : client.getSignature(partner.encode('latin1')).decode('latin1')}
+            logging.info(f"Initialising message to server with the following payload:")
+            logging.info(f"jso: {json}")
             sio.emit('init msg', json)
-        elif uIn in "fF":
-            client.printFreeUsers()
         elif uIn in "dD":
             client.deleteAccount()
         elif uIn in "eE":
             client.end(sio)
     elif uIn == "!exit":
+        logging.info(f"Ending chat with user")
+        logging.info(f"chatting: {chatting}")
+        logging.info(f"targetPublicKey: {targetPublicKey}")
+        logging.info(f"Clearing contents...")
         chatting = ""
-    # else:
-        
+        targetPublicKey = None
+        logging.info(f"chatting: {chatting}")
+        logging.info(f"targetPublicKey: {targetPublicKey}")
+    else:
+        logging.info(f"Sending message to <{chatting}>")
+        logging.info(f"Message: {uIn}")
+        symKey = Fernet.generate_key()
+        logging.info(f"Symmetric Key: {symKey.decode('latin1')}")
+        f = Fernet(symKey)
+        message = f.encrypt(uIn.encode('latin1'))
+        message = message.decode('latin1')
+        symKey = targetPublicKey.encrypt(symKey, 
+            padding.OAEP(
+                mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                algorithm=hashes.SHA256(),
+                label=None
+        ))
+        logging.info(f"Encrypting message and symmetric key")
+        signature = client.getSignature(symKey).decode('latin1')
+        symKey = symKey.decode('latin1')
+        logging.info(f"Message: {message}")
+        logging.info(f"Symmetric Key: {symKey}")
+        logging.info(f"Sending message with the following payload:")
+        json = {'source': client.username, 'target': chatting, 'message': message, 'symKey': symKey, 'signature': signature}
+        logging.info(f"json: {json}")
+        sio.emit("send message", json)

@@ -110,13 +110,13 @@ def login():
 
         if error is None:
             try:
-                logging.info(f"User {username} succesfully found")
-                logging.info(f"Updating the public key for {username}")
+                logging.info(f"User <{username}> succesfully found")
+                logging.info(f"Updating the public key for <{username}>")
                 db.execute(
                     "UPDATE user SET public_key = ? WHERE username = ?",
                     (publicKey, username),
                 )
-                logging.info(f"Updated public key of {username} to:\n {publicKey}")
+                logging.info(f"Updated public key of <{username}> to:\n {publicKey}")
                 logging.info(f"Successfully logged in: {username}")
                 db.commit()
             except db.IntegrityError:
