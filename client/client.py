@@ -259,7 +259,7 @@ def connect():
     logging.info(f"Successfully connected to server")
 
 @sio.event
-def connect_error(data):
+def connect_error():
     logging.info(f"Can't connect to server")
 
 @sio.event

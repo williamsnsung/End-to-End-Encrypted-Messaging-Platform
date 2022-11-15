@@ -1,7 +1,7 @@
 import sqlite3
 import click
 import os
-from flask import current_app, g, flash
+from flask import current_app, g
 
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
@@ -114,26 +114,6 @@ def getRSAPrivateKey():
     privateKeyFile.close()
     return serialization.load_pem_private_key(data, password, True)
 
-# gets the public key from our rsa key
-def getRSAPublicKey():
-    if not Path(keyFile).is_file():
-        generateRSAKey()
-    privateKey = getRSAPrivateKey()
-    return privateKey.public_key()
-
-# signs a message using the private key
-def getSignature(messageBinary):
-    privateKey = getRSAPrivateKey()
-    signature = privateKey.sign(
-        messageBinary,
-            padding.PSS(
-            mgf=padding.MGF1(hashes.SHA256()),
-            salt_length=padding.PSS.MAX_LENGTH
-        ),
-        hashes.SHA256()
-    )
-    return signature
-
 # verifies that a message is from the user by using the provided signature and the public key on the database
 def verifyMessageSignature(messageBinary, signatureBinary, username):
     db = get_db()
@@ -150,8 +130,6 @@ def verifyMessageSignature(messageBinary, signatureBinary, username):
                 error = 'Incorrect username.'
         except db.IntegrityError:
             error = f"User {username} does not exist."
-
-    flash(error)
 
     # read the public key into a usable format
     publicKey = serialization.load_pem_public_key(
@@ -172,31 +150,6 @@ def verifyMessageSignature(messageBinary, signatureBinary, username):
     except InvalidSignature:
         return False
     return True
-
-# decrypts a message using the server private key
-def decrypt(cipherText):
-    privateKey = getRSAPrivateKey()
-    plainText = privateKey.decrypt(
-        cipherText,
-        padding.OAEP(
-            mgf=padding.MGF1(algorithm=hashes.SHA256()),
-            algorithm=hashes.SHA256(),
-            label=None
-        )
-    )
-    return plainText
-
-# encrypts a message using the server private key
-def encrypt(messageBinary, publicKey):
-    cipherText = publicKey.encrypt(
-        messageBinary,
-        padding.OAEP(
-            mgf=padding.MGF1(algorithm=hashes.SHA256()),
-            algorithm=hashes.SHA256(),
-            label=None
-        )
-    )
-    return cipherText
 
 # uses the scrypt key derivation algorithm to encode the password so that it may be stored on the database
 # returns the salt used and the resultant key
