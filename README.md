@@ -7,7 +7,7 @@ Create a virtual environment (Though one is provided!):
 	python3 -m venv ./venv  
 Activate it:
 	source venv/bin/activate	
-Install the following (If you created your own virtual environment):
+Install the following (If you created your own virtual environment/pip list is magically empty):
 	pip install Flask
 	pip install cryptography
 	pip install eventlet
